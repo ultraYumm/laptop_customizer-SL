@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-
 // Normalizes string as a slug - a string that is safe to use
 // in both URLs and html attributes
 import slugify from 'slugify';
+import FeatureList from './FeatureList';
+import CartList from './CartList';
+
 
 import './App.css';
 
@@ -45,11 +47,12 @@ class App extends Component {
 
   render() {
     const features = Object.keys(this.props.features).map((feature, idx) => {
+      
       const featureHash = feature + '-' + idx;
       const options = this.props.features[feature].map(item => {
         const itemHash = slugify(JSON.stringify(item));
         return (
-          <div key={itemHash} className="feature__item">
+          <div key={itemHash} className="feature__item"> Test 3
             <input
               type="radio"
               id={itemHash}
@@ -68,10 +71,10 @@ class App extends Component {
       return (
         <fieldset className="feature" key={featureHash}>
           <legend className="feature__name">
-            <h3>{feature}</h3>
+            <h3></h3>
           </legend>
-          {options}
-        </fieldset>
+         
+          </fieldset>
       );
     });
 
@@ -80,8 +83,8 @@ class App extends Component {
       const selectedOption = this.state.selected[feature];
 
       return (
-        <div className="summary__option" key={featureHash}>
-          <div className="summary__option__label">{feature} </div>
+        <div className="summary__option" key={featureHash}> Test Cart1
+          <div className="summary__option__label">{feature} Test Cart2</div>
           <div className="summary__option__value">{selectedOption.name}</div>
           <div className="summary__option__cost">
             {USCurrencyFormat.format(selectedOption.cost)}
@@ -103,10 +106,12 @@ class App extends Component {
         <main>
           <form className="main__form">
             <h2>Customize your laptop</h2>
-            {features}
+            <FeatureList
+            features = {features} />
           </form>
           <section className="main__summary">
             <h2>Your cart</h2>
+            <CartList />
             {summary}
             <div className="summary__total">
               <div className="summary__total__label">Total</div>
