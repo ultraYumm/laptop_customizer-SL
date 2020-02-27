@@ -1,34 +1,31 @@
-import React from 'react'
+import React, { Component } from 'react';
+import './App.css';
 
-export default function FeatureOptions(props) {
-  return (
-    <div> Details
+const USCurrencyFormat = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD'
+});
+
+class FeatureOptions extends React.Component{
+  render() {
+
+    return (
+      <div className="feature__item">
+      {this.props.options}
       <input
-              type="radio"
-            />
-            <label> 
-             </label>
-        
-    </div>
-  )
+       type="radio"
+       id= {this.props.id}
+       className="feature__option"
+       name= {this.props.name}
+       checked = {this.props.checked}
+       onChange= {this.props.onChange}
+       />
+        <label htmlFor={this.props.itemHash} className="feature__label">
+          {this.props.label} ({USCurrencyFormat.format(this.props.cost)})
+        </label>
+    </div>)
+ }
 }
 
-FeatureOptions.defaultProps = {
-  item: {}
-}
-
-
-/*<div key={itemHash} className="feature__item"> Test 3
-            <input
-              type="radio"
-              id={itemHash}
-              className="feature__option"
-              name={slugify(feature)}
-              checked={item.name === this.state.selected[feature].name}
-              onChange={e => this.updateFeature(feature, item)}
-            />
-            <label htmlFor={itemHash} className="feature__label">
-              {item.name} ({USCurrencyFormat.format(item.cost)})
-            </label>
-          </div>
-        );*/
+export default FeatureOptions;
+ 
