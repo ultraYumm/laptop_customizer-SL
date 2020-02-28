@@ -17,7 +17,10 @@ const USCurrencyFormat = new Intl.NumberFormat('en-US', {
 });
 
 class App extends Component {
-  state = {
+  constructor(props) {
+    super(props);
+    
+    this.state = {
     selected: {
       Processor: {
         name: '17th Generation Intel Core HB (7 Core with donut spare)',
@@ -36,15 +39,19 @@ class App extends Component {
         cost: 1500
       }
     }
-  };
+   
+  }
+  this.updateFeature = this.updateFeature.bind(this);
 
-  updateFeature = (feature, newValue) => {
-    const selected = Object.assign({}, this.state.selected);
-    selected[feature] = newValue;
-    this.setState({
-      selected
-    });
-  };
+};
+
+updateFeature = (feature, newValue) => {
+  const selected = Object.assign({}, this.state.selected);
+  selected[feature] = newValue;
+  this.setState({
+    selected
+  });
+}
 
   render() {
     const features = Object.keys(FEATURES).map((feature, idx) => {
@@ -57,7 +64,8 @@ class App extends Component {
             id = {itemHash}
             name = {slugify(feature)}
             checked = {item.name === this.state.selected[feature].name}
-            onChange = {e => this.updateFeature(feature, item)}
+            onChange = {this.updateFeature}
+            laptopOptions = {this.state}
             label = {item.name}
             item = {item}
             cost = {item.cost}
@@ -109,13 +117,8 @@ class App extends Component {
             <h2>Your cart</h2>
             <Cart
             features= {features}
-            summary = {summary} />
-            <div className="summary__total">
-              <div className="summary__total__label">Total</div>
-              <div className="summary__total__value">
-                {USCurrencyFormat.format(total)}
-              </div>
-            </div>
+            summary = {summary}
+            total = {USCurrencyFormat.format(total)}/>
           </section>
         </main>
       </div>

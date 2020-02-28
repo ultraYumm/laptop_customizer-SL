@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import slugify from 'slugify';
-import FeatureOptions from './FeatureOptions'
+import FeatureOptions from './FeatureOptions';
 import './App.css';
 
-const USCurrencyFormat = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD'
-});
+
 
 class FeatureList extends React.Component{
-  
+
+   
+
   render() {
+
+    
 
      return (
       <fieldset className="feature">
@@ -21,6 +21,7 @@ class FeatureList extends React.Component{
            </h3>
         </legend>
            <FeatureOptions
+            laptopOptions = {this.props.laptopOptions}
             options = {this.props.options}
             id= {this.props.id}
             name= {this.props.name}
@@ -29,6 +30,9 @@ class FeatureList extends React.Component{
             label= {this.props.label}
             itemHash = {this.props.itemHash} 
             cost = {this.props.cost}
+            features = {this.props.features}
+            feature = {this.props.feature} 
+            item = {this.props.item} 
           />
       </fieldset>)
   }
@@ -54,35 +58,3 @@ export default FeatureList;
           </label>
       </div>*/
 
-
-/*render() {
-  const features = Object.keys(this.props.features).map((feature, idx) => {
-    const featureHash = feature + '-' + idx;
-    const options = this.props.features[feature].map(item => {
-      const itemHash = slugify(JSON.stringify(item));
-      return (
-        <div key={itemHash} className="feature__item">
-          <input
-            type="radio"
-            id={itemHash}
-            className="feature__option"
-            name={slugify(feature)}
-            checked={item.name === this.state.selected[feature].name}
-            onChange={e => this.updateFeature(feature, item)}
-          />
-          <label htmlFor={itemHash} className="feature__label">
-            {item.name} ({USCurrencyFormat.format(item.cost)})
-          </label>
-        </div>
-      );
-    });
-
-    return (
-      <fieldset className="feature" key={featureHash}>
-        <legend className="feature__name">
-          <h3>{feature}</h3>
-        </legend>
-        {options}
-      </fieldset>
-    );
-  })};*/
