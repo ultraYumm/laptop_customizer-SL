@@ -14,9 +14,7 @@ class Cart extends React.Component {
         <div className="summary__option__cost">
           {this.props.cost}
         </div>
-        <CartTotal 
-        total= {this.props.total} />
-      </div>
+        </div>
 
     );
   }

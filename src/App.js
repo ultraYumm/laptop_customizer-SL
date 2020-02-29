@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import slugify from 'slugify';
 import FeatureList from './FeatureList'
 import Cart from './Cart'
+import CartTotal from './CartTotal'
 
 import './App.css';
 import FEATURES from './FEATURES'
@@ -119,6 +120,8 @@ updateFeature = (feature, newValue) => {
             features= {features}
             summary = {summary}
             total = {USCurrencyFormat.format(total)}/>
+            <CartTotal 
+            total = {total} />
           </section>
         </main>
       </div>
