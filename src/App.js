@@ -52,34 +52,21 @@ updateFeature = (feature, newValue) => {
   this.setState({
     selected
   });
+  console.log("This is updateFeature")
 }
 
   render() {
-    const features = Object.keys(FEATURES).map((feature, idx) => {
-      const featureHash = feature + '-' + idx;
-      const options = FEATURES[feature].map(item => {
-        const itemHash = slugify(JSON.stringify(item));
-        return (
-          <FeatureList 
-            key = {itemHash} 
-            id = {itemHash}
-            name = {slugify(feature)}
-            checked = {item.name === this.state.selected[feature].name}
-            onChange = {this.updateFeature}
-            laptopOptions = {this.state}
-            label = {item.name}
-            item = {item}
-            cost = {item.cost}
-            />
-        );
-      });
-
+    const featureLists = Object.keys(FEATURES).map((feature, idx) => {
+      const featureHash = feature + "-" + idx;
+      const features = FEATURES[feature];
+    
       return (
         <FeatureList 
-           key={featureHash}
-           feature = {feature}
-           options= {options}
-       />
+        key= {featureHash} 
+        featureTitle= {feature}
+        features={features}
+        updateFeature = {this.updateFeature}
+        />
       );
     });
 
@@ -90,10 +77,10 @@ updateFeature = (feature, newValue) => {
       return (
         <Cart 
           key ={featureHash}
-          feature = {feature} 
+          featureTitle= {feature}
           selected = {selectedOption.name}
           cost = {USCurrencyFormat.format(selectedOption.cost)}
-        />);
+         />);
     });
 
 
@@ -111,15 +98,11 @@ updateFeature = (feature, newValue) => {
         <main>
           <form className="main__form">
             <h2>Customize your laptop</h2>
-            <FeatureList
-            features= {features}/>
+            {featureLists}
           </form>
           <section className="main__summary">
             <h2>Your cart</h2>
-            <Cart
-            features= {features}
-            summary = {summary}
-            total = {USCurrencyFormat.format(total)}/>
+            {summary}
             <CartTotal 
             total = {total} />
           </section>
@@ -210,3 +193,30 @@ export default App;
 }
 }*/
 
+/*const features = Object.keys(FEATURES).map((feature, idx) => {
+  const featureHash = feature + '-' + idx;
+  const options = FEATURES[feature].map(item => {
+    const itemHash = slugify(JSON.stringify(item));
+    return (
+      <FeatureList 
+        key = {itemHash} 
+        id = {itemHash}
+        name = {slugify(feature)}
+        checked = {item.name === this.state.selected[feature].name}
+        onChange={this.updateFeature}
+        laptopOptions = {this.state}
+        label = {item.name}
+        item = {item}
+        cost = {item.cost}
+        />
+    );
+  });
+
+  return (
+    <FeatureList 
+       key={featureHash}
+       feature = {feature}
+       options= {options}
+   />
+  );
+});*/

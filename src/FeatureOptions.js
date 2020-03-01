@@ -8,17 +8,11 @@ const USCurrencyFormat = new Intl.NumberFormat('en-US', {
 
 class FeatureOptions extends React.Component{
   
-  constructor(props) {
-    super(props);
-    this.handleChange = this.handleChange.bind(this)
-    }
- 
-    handleChange(e) {
-    const feature = e.target.value;
-    const item = e.target.value;
-  this.props.onChange(feature, item);
-    }
-  
+
+  //handleChange = {e => (this.props.onChange)}
+
+
+
   render() {
 
     
@@ -26,18 +20,16 @@ class FeatureOptions extends React.Component{
     return (
       <div className="feature__item">
       {this.props.options}
-     
-      <input
+        <input
        type="radio"
        className="feature__option"
-       checked = {this.props.checked}
-       onChange= {this.handleChange}
        feature= {this.props.feature}
-       item= {this.props.item}
+       checked={this.props.checked}
+       onChange ={this.props.onChange}
+       updateFeature = {this.updateFeature}
        />
         <label htmlFor={this.props.itemHash} className="feature__label">
-          {this.props.label} ({USCurrencyFormat.format(this.props.cost)})
-        </label>
+          {this.props.name} ({USCurrencyFormat.format(this.props.cost)})</label>
     </div>)
  }
 }

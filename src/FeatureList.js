@@ -1,60 +1,60 @@
 import React, { Component } from 'react';
 import FeatureOptions from './FeatureOptions';
 import './App.css';
+import slugify from 'slugify';
 
 
 
-class FeatureList extends React.Component{
 
-   
-
-  render() {
-
+    class FeatureList extends React.Component {
+      render() {
+        const options = this.props.features.map(feature => {
+          const itemHash = slugify(JSON.stringify(feature));
+          return <FeatureOptions
+          feature={this.props.featureTitle}
+          key={itemHash}
+          name={feature.name}
+          cost={feature.cost}
+          updateFeature={this.props.updateFeature}
+          selected={this.props.selected}
+          checked={feature.name === this.props.selected}
+          onChange={e => this.props.updateFeature}
+          />;
+        });
+    
+        return (
+          <fieldset className="feature">
+            <legend className="feature__name">
+              <h3>{this.props.featureTitle}</h3>
+            </legend>
+            {options}
+          </fieldset>
+        );
+      }
+    }
+     
     
 
-     return (
-      <fieldset className="feature">
-        <legend className="feature__name">
-          <h3>
-            {this.props.features}
-            {this.props.feature} 
-           </h3>
-        </legend>
-           <FeatureOptions
-            laptopOptions = {this.props.laptopOptions}
-            options = {this.props.options}
-            id= {this.props.id}
-            name= {this.props.name}
-            checked = {this.props.checked}
-            onChange= {this.props.onChange}
-            label= {this.props.label}
-            itemHash = {this.props.itemHash} 
-            cost = {this.props.cost}
-            features = {this.props.features}
-            feature = {this.props.feature} 
-            item = {this.props.item} 
-          />
-      </fieldset>)
-  }
-}
-
 export default FeatureList;
-  
 
-/*<div className="feature__item">
-        {this.props.features}
-        {this.props.feature}
-        {this.props.options}
-        <input
-         type="radio"
-         id= {this.props.id}
-         className="feature__option"
-         name= {this.props.name}
-         checked = {this.props.checked}
-         onChange= {this.props.onChange}
-         />
-          <label htmlFor={this.props.itemHash} className="feature__label">
-            {this.props.label} ({USCurrencyFormat.format(this.props.cost)})
+/*render() {
+  const features = Object.keys(this.props.features).map((feature, idx) => {
+    const featureHash = feature + '-' + idx;
+    const options = this.props.features[feature].map(item => {
+      const itemHash = slugify(JSON.stringify(item));
+      return (
+        <div key={itemHash} className="feature__item">
+          <input
+            type="radio"
+            id={itemHash}
+            className="feature__option"
+            name={slugify(feature)}
+            checked={item.name === this.state.selected[feature].name}
+            onChange={e => this.updateFeature(feature, item)}
+          />
+          <label htmlFor={itemHash} className="feature__label">
+            {item.name} ({USCurrencyFormat.format(item.cost)})
           </label>
-      </div>*/
-
+        </div>
+      );
+    });*/
