@@ -22,8 +22,7 @@ class MainSummary extends React.Component {
             featureTitle = {feature}
             selected = {selectedOption.name}
             cost = {USCurrencyFormat.format(selectedOption.cost)}
-           
-          />
+           />
         );
       })
 
