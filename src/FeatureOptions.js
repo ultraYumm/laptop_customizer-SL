@@ -13,22 +13,22 @@ class FeatureOptions extends React.Component {
       <div className="feature__item" key={this.props.itemHash}>
         {this.props.options}
         <input
-          type="radio"
-          id={this.props.itemHash}
-          className="feature__option"
-          name={slugify(this.props.featureTitle)}
-          checked={
+          type = "radio"
+          id = {this.props.itemHash}
+          className = "feature__option"
+          name = {slugify(this.props.featureTitle)}
+          checked = {
             this.props.feature.name ===
             this.props.selected[this.props.featureTitle].name
           }
-          onChange={e =>
+          onChange = {e =>
             this.props.updateFeature(
               this.props.featureTitle,
               this.props.feature
             )
           }
         />
-        <label htmlFor={this.props.itemHash} className="feature__label">
+        <label htmlFor = {this.props.itemHash} className="feature__label">
           {this.props.name} ({USCurrencyFormat.format(this.props.cost)})
         </label>
       </div>

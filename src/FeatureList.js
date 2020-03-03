@@ -10,13 +10,14 @@ class FeatureList extends React.Component {
       const itemHash = slugify(JSON.stringify(feature));
       return (
         <FeatureOptions
-          feature={feature}
-          featureTitle={this.props.featureTitle}
-          itemHash={itemHash}
-          name={feature.name}
-          cost={feature.cost}
-          updateFeature={this.props.updateFeature}
-          selected={this.props.selected}
+          key = {itemHash}
+          feature = {feature}
+          featureTitle = {this.props.featureTitle}
+          itemHash = {itemHash}
+          name = {feature.name}
+          cost = {feature.cost}
+          updateFeature = {this.props.updateFeature}
+          selected = {this.props.selected}
          />
       );
     });

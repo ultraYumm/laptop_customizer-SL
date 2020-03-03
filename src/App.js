@@ -2,19 +2,14 @@ import React, { Component } from "react";
 
 // Normalizes string as a slug - a string that is safe to use
 // in both URLs and html attributes
-import FeatureList from "./FeatureList";
-import Cart from "./Cart";
-import CartTotal from "./CartTotal";
 
+import MainSummary from "./MainSummary.js";
+import MainForm from "./MainForm";
+import Header from "./Header";
 import "./App.css";
-import FEATURES from "./FEATURES";
 
 // This object will allow us to
 // easily convert numbers into US dollar values
-const USCurrencyFormat = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD"
-});
 
 class App extends Component {
   constructor(props) {
@@ -43,7 +38,6 @@ class App extends Component {
   }
 
   updateFeature = (feature, newValue) => {
-    console.log("This is updateFeature");
     const selected = Object.assign({}, this.state.selected);
     selected[feature] = newValue;
     this.setState({
@@ -52,55 +46,17 @@ class App extends Component {
   };
 
   render() {
-    const featureLists = Object.keys(FEATURES).map((feature, idx) => {
-      const featureHash = feature + "-" + idx;
-      const features = FEATURES[feature];
-
-      return (
-        <FeatureList
-          featureHash={featureHash}
-          featureTitle={feature}
-          features={features}
-          updateFeature={this.updateFeature}
-          selected={this.state.selected}
-        />
-      );
-    });
-
-    const summary = Object.keys(this.state.selected).map((feature, idx) => {
-      const featureHash = feature + "-" + idx;
-      const selectedOption = this.state.selected[feature];
-
-      return (
-        <Cart
-          key={featureHash}
-          featureTitle={feature}
-          selected={selectedOption.name}
-          cost={USCurrencyFormat.format(selectedOption.cost)}
-        />
-      );
-    });
-
-    const total = Object.keys(this.state.selected).reduce(
-      (acc, curr) => acc + this.state.selected[curr].cost,
-      0
-    );
-
+    
     return (
       <div className="App">
-        <header>
-          <h1>ELF Computing | Laptops</h1>
-        </header>
+       <Header /> 
         <main>
-          <form className="main__form">
-            <h2>Customize your laptop</h2>
-            {featureLists}
-          </form>
-          <section className="main__summary">
-            <h2>Your cart</h2>
-            {summary}
-            <CartTotal total={total} />
-          </section>
+          <MainForm 
+          updateFeature = {this.updateFeature}
+          selected = {this.state.selected}/>
+          <MainSummary 
+          selected = {this.state.selected}
+          />
         </main>
       </div>
     );
